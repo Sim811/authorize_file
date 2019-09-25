@@ -13,7 +13,7 @@ class FetchUser extends React.Component {
     }
     else {
       if (this.checkLocalToken()) {
-        axios.get("/api/aut/validate_token")
+        axios.get("/api/auth/validate_token")
           .then( res => {
             setUser(res.data.data);
             this.loaded();
