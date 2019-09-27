@@ -1,23 +1,35 @@
 import React from "react";
 import PostForm from "./PostForm";
 import axios from "axios";
-import {List, Header, Segment, Button} from "semantic-ui-react";
+import { List, Header, Segment, } from "semantic-ui-react";
+
+
+// const Posts = (props) => {
+//   const [posts, setPosts] = useState
+// }
+
+
 
 
 class Posts extends React.Component {
-  class = { posts: [] }
+  state = { posts: [] };
 
 
   componentDidMount() {
+
     axios.get("/api/posts")
       .then(res => {
         this.setState({ posts: res.data })
+
       })
   }
 
   renderPosts = () => {
-    const { posts } = this.state;
-    return posts.map( post => (
+    // const { posts } = this.state.posts;
+
+    if (this.state.posts.length <= 0)
+      return <Header as="h2">No Posts</Header>
+    return this.state.posts.map(post => (
       <Segment key={post.id}>
         <List.Header as="h3">{post.title}</List.Header>
         <List.Description>
@@ -27,20 +39,24 @@ class Posts extends React.Component {
     ))
   }
 
+  addPost = (post) => {
+    const { posts } = this.state;
+    this.setState({ posts: [ post, ...posts,] })
+  }
+ 
   render() {
-    return(
+    return (
       <>
-      <Header as="h1" textAlign="center" >My Posts</Header>
-      <br />
-      {/* { showForm && <PostForm />}
-      <Button onClick={() => setShowForm(!showForm)}>
-        { showForm ? "Close Form" : "Show Form"}
-      </Button> */}
-      <PostForm />
-      <br />
-      {/* <List>
-        {this.renderPosts()}
-      </List> */}
+        <br />
+        <Header as="h1" textAlign="center" >My Posts</Header>
+        <br />
+
+        <PostForm add={this.addPost} />
+        <br />
+        <List>
+          {this.renderPosts()}
+        </List>
+        <br />
       </>
     )
   }

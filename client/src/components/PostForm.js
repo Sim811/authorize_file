@@ -12,11 +12,12 @@ class PostForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { router } = this.props
     axios.post("/api/posts", {...this.state})
-      .then( res => {
-        this.props.add(res.data);
-        this.props.toggleForm();
-      });
+    .then( res => {
+      this.props.add(res.data);
+      this.setState({title: '', body: ''})
+    });
   };
 
 
