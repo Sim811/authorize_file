@@ -13,7 +13,7 @@ class PostForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { router } = this.props
-    axios.post("/api/posts", {...this.state})
+    axios.post("/api/users/:user_id/posts", {...this.state})
     .then( res => {
       this.props.add(res.data);
       this.setState({title: '', body: ''})

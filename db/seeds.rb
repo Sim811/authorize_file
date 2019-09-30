@@ -2,6 +2,7 @@
  u = User.create(
    email: Faker::Internet.free_email,
    password: Faker::Internet.password,
+   name: Faker::Esport.player,
  )
   15.times do
   u.posts.create(

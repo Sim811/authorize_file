@@ -47,7 +47,7 @@ class Posts extends React.Component {
   render() {
     return (
       <>
-        <br />
+       
         <Header as="h1" textAlign="center" >My Posts</Header>
         <br />
 
